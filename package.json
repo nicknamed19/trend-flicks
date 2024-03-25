@@ -1,0 +1,19 @@
+{
+  "name": "trend-flicks",
+  "version": "1.0.0",
+  "description": "Movies App",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicknamed19/trend-flicks.git"
+  },
+  "author": "Jose Julian Fuentes <nicknamed19@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicknamed19/trend-flicks/issues"
+  },
+  "homepage": "https://github.com/nicknamed19/trend-flicks#readme"
+}
