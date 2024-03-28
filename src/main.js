@@ -38,7 +38,11 @@ async function getCategoriesPreview() {
     categoriesPreviewList.innerHTML = ''
     categories.forEach(category => {
         const categoryContainer = document.createElement('div');
-        categoryContainer.classList.add('category-container')
+        categoryContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+            location.hash = `#category=${category.id}-${category.name}`
+        });
+        categoryContainer.classList.add('category-container');
 
         const categoryTitle = document.createElement('h3');
         categoryTitle.id = `id${category.id}`;
@@ -48,5 +52,29 @@ async function getCategoriesPreview() {
         categoryContainer.appendChild(categoryTitle);
         categoriesPreviewList.appendChild(categoryContainer);
     })
-    
+}
+
+async function getMoviesByCategory(categoryId, categoryName) {
+    const {data, status} = await api('/discover/movie', {
+        params: {
+            with_genres: categoryId,
+        },
+    });
+
+    const movies = data.results;
+    headerCategoryTitle.innerText = categoryName;
+    genericSection.innerHTML = ''
+
+    movies.forEach(film => {
+        const filmContainer = document.createElement('div');
+        filmContainer.classList.add('movie-container');
+
+        const filmImg = document.createElement('img');
+        filmImg.classList.add('movie-img');
+        filmImg.alt = film.title;
+        filmImg.src = 'https://image.tmdb.org/t/p/w300' + film.poster_path;
+
+        filmContainer.appendChild(filmImg);
+        genericSection.appendChild(filmContainer);
+    })
 }
