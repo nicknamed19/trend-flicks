@@ -1,8 +1,15 @@
 'use strict'
 
-const changeHash = (hash) => location.hash = hash;
+const changeHash = (hash) => {
+    hash === '#search=' 
+        ? location.hash = hash + searchFormInput.value
+        : location.hash = hash;
+};
 
-arrowBtn.addEventListener('click', () => changeHash('#home'));
+arrowBtn.addEventListener('click', () => {
+    console.log(history);
+    history.back();
+});
 searchFormBtn.addEventListener('click', () => changeHash('#search='));
 trendingBtn.addEventListener('click', () => changeHash('#trends'));
 
@@ -10,7 +17,7 @@ window.addEventListener('load', navigator);
 window.addEventListener('hashchange', navigator);
 
 function navigator() {
-    console.log({location});
+    scrollTo(top)
 
     if (location.hash.startsWith('#trends')) {
         trendsPage()
@@ -27,8 +34,6 @@ function navigator() {
 
 
 function trendsPage() {
-    console.log('trends');
-
     headerSection.classList.remove('header-container--long');
     headerSection.style.background = '';
     arrowBtn.classList.remove('inactive');
@@ -44,8 +49,6 @@ function trendsPage() {
 }
 
 function searchPage() {
-    console.log('SEARCH');
-
     headerSection.classList.remove('header-container--long');
     headerSection.style.background = '';
     arrowBtn.classList.remove('inactive');
@@ -58,6 +61,13 @@ function searchPage() {
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+
+    const [_, searchValue] = location.hash.split('=');
+    const query = fixQueries(searchValue);
+    
+    headerCategoryTitle.innerText = `Results for ${query}`;
+    searchFormInput.value = ''
+    getMoviesByQuery(query);
 }
 
 function movieDetailsPage() {
@@ -78,8 +88,6 @@ function movieDetailsPage() {
 }
 
 function categoriesPage() {
-    console.log('CATEGORIES');
-
     headerSection.classList.remove('header-container--long');
     headerSection.style.background = '';
     arrowBtn.classList.remove('inactive');
@@ -95,14 +103,14 @@ function categoriesPage() {
 
     const [_, hashData] = location.hash.split('=');
     const [categoryId, categoryName] = hashData.split('-');
-    console.log({categoryId}, {categoryName});
 
-    getMoviesByCategory(categoryId, categoryName);
+    const fixCategoryName = fixQueries(categoryName);
+    headerCategoryTitle.innerText = fixCategoryName;
+
+    getMoviesByCategory(categoryId);
 }
 
 function homePage() {
-    console.log('HOME');
-
     headerSection.classList.remove('header-container--long');
     headerSection.style.background = '';
     arrowBtn.classList.add('inactive');
