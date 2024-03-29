@@ -152,4 +152,13 @@ async function getMovieDetails(movieId) {
     movieDetailDescription.innerText = movie.overview;
 
     createCategoriesContainer(movieCategories, movieDetailCategoriesList);
+    getMoviesRelated(movieId);
 };
+
+async function getMoviesRelated(movieId) {
+    const { data } = await api(`/movie/${movieId}/recommendations`);
+    const movies = data.results;
+
+    relatedMoviesContainer.scrollLeft = 0
+    createMoviesContainer(movies, relatedMoviesContainer);
+}
