@@ -14,6 +14,9 @@ function createMoviesContainer(array, parent) {
     array.forEach(film => {
         const filmContainer = document.createElement('div');
         filmContainer.classList.add('movie-container');
+        filmContainer.addEventListener('click', () => {
+            location.hash = `#movie=${film.id}`
+        });
 
         const filmImg = document.createElement('img');
         filmImg.classList.add('movie-img');
@@ -120,3 +123,33 @@ async function getMoviesByQuery(query) {
         ? genericSection.innerHTML = `<p>Sorry, no results found for <strong>${query}</strong> :(</p>`
         : createMoviesContainer(movies, genericSection);
 }
+
+async function getTrendingMovies() {
+    const {data, status} = await api('/trending/movie/day');
+    const movies = data.results;
+
+    createMoviesContainer(movies, genericSection);
+};
+
+async function getMovieDetails(movieId) {
+    const { data: movie } = await api(`/movie/${movieId}`);
+
+    const movieCategories = movie.genres;
+    const voteAvarenge = movie.vote_average;
+    const imgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    
+    headerSection.style.background = `
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.35) 19.27%, 
+            rgba(0, 0, 0, 0) 29.17%
+        ), 
+        url(${imgUrl})
+    `;
+
+    movieDetailTitle.innerText = movie.title;
+    movieDetailScore.innerText = voteAvarenge.toFixed(1);
+    movieDetailDescription.innerText = movie.overview;
+
+    createCategoriesContainer(movieCategories, movieDetailCategoriesList);
+};
