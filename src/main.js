@@ -69,6 +69,9 @@ async function getMovieDetails(movieId) {
         url(${imgUrl})
     `;
 
+    movieDetailTitle.classList.remove('movieDetail-title--skeleton');
+    movieDetailScore.classList.remove('movieDetail-score--skeleton');
+
     movieDetailTitle.innerText = movie.title;
     movieDetailScore.innerText = voteAvarenge.toFixed(1);
     movieDetailDescription.innerText = movie.overview;

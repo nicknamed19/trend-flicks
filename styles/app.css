@@ -407,6 +407,9 @@ button {
   border-radius: 8px;
   background-color: var(--background-skeleton);
   animation: pulse 1.5s ease-in-out infinite alternate;
+  position: relative;
+  bottom: 23px;
+  left: 128px;
 }
 
 /* .movieDetail-description--skeleton {

@@ -30,19 +30,14 @@ function homePageSkeleton() {
 }
 
 function movieDetailSkeleton() {
-    const movieDetailTitle = document.createElement('div');
-    movieDetailTitle.classList.add('movieDetail-title--skeleton')
+    movieDetailTitle.innerText = '';
+    movieDetailScore.innerText = '';
 
-    const movieDetailScore = document.createElement('div');
-    movieDetailScore.classList.add('movieDetail-score--skeleton')
+    movieDetailTitle.classList.add('movieDetail-title--skeleton');
+    movieDetailScore.classList.add('movieDetail-score--skeleton');
 
-    const relatedMoviesTitle = document.createElement('div');
-    relatedMoviesTitle.classList.add('relatedMovies-title--skeleton')
-
-    movieDetailSection.append(movieDetailTitle, movieDetailScore)
-    
-    movieSkeleton(relatedMoviesContainer)
-    categorySkeleton(movieDetailCategoriesList, 4)
+    movieSkeleton(relatedMoviesContainer);
+    categorySkeleton(movieDetailCategoriesList, 4);
 }
 
 function createMoviesContainer(array, parent) {
