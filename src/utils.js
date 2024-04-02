@@ -1,18 +1,20 @@
 //UTILS
 function movieSkeleton(parent) {
+    parent.innerHTML = '';
     const n = 6;
 
     for (let index = 0; index < n; index++) {
         const filmContainer = document.createElement('div');
         filmContainer.classList.add('movie-skeleton');  
 
-        parent.appendChild(filmContainer)
+        parent.append(filmContainer)
     }
     console.log(parent);
 }
 
-function categorySkeleton(parent) {
-    const n = 10;
+function categorySkeleton(parent, quantity) {
+    parent.innerHTML = '';
+    const n = quantity;
 
     for (let index = 0; index < n; index++) {
         const categoryContainer = document.createElement('div');
@@ -24,15 +26,28 @@ function categorySkeleton(parent) {
 
 function homePageSkeleton() {
     movieSkeleton(trendingMoviesPreviewList)
-    categorySkeleton(categoriesPreviewList)
+    categorySkeleton(categoriesPreviewList, 10)
 }
 
-function genericSectionSkeleton() {
-    movieSkeleton(genericSection)
+function movieDetailSkeleton() {
+    const movieDetailTitle = document.createElement('div');
+    movieDetailTitle.classList.add('movieDetail-title--skeleton')
+
+    const movieDetailScore = document.createElement('div');
+    movieDetailScore.classList.add('movieDetail-score--skeleton')
+
+    const relatedMoviesTitle = document.createElement('div');
+    relatedMoviesTitle.classList.add('relatedMovies-title--skeleton')
+
+    movieDetailSection.append(movieDetailTitle, movieDetailScore)
     
+    movieSkeleton(relatedMoviesContainer)
+    categorySkeleton(movieDetailCategoriesList, 4)
 }
 
 function createMoviesContainer(array, parent) {
+    parent.innerHTML = '';
+
     array.forEach(film => {
         const filmContainer = document.createElement('div');
         filmContainer.classList.add('movie-container');
@@ -46,7 +61,6 @@ function createMoviesContainer(array, parent) {
         filmImg.src = 'https://image.tmdb.org/t/p/w300' + film.poster_path;
         
         filmContainer.appendChild(filmImg);
-        parent.innerHTML = '';
         parent.appendChild(filmContainer);
     });
 }
@@ -61,12 +75,12 @@ function createCategoriesContainer(array, parent) {
             location.hash = `#category=${category.id}-${category.name}`
         });
         categoryContainer.classList.add('category-container');
-
+        
         const categoryTitle = document.createElement('h3');
         categoryTitle.id = `id${category.id}`;
         categoryTitle.classList.add('category-title');
         categoryTitle.innerText = category.name;
-
+        
         categoryContainer.appendChild(categoryTitle);
         parent.appendChild(categoryContainer);
     })

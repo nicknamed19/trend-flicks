@@ -303,6 +303,8 @@ button {
 .genericList-container .movie-skeleton {
   display: inline-block;
   width: 47.5%;
+  height: 363px;
+  margin-bottom: 8px;
   border-radius: 8px;
   background-color: var(--background-skeleton);
   animation: pulse 1.5s ease-in-out infinite alternate;
@@ -374,6 +376,51 @@ button {
   max-height: 187.5px;
 }
   
+/* MOVIE DETAIL SKELETON */
+.relatedMovies-scrollContainer .movie-skeleton {
+  display: inline-block;
+  margin-right: 8px;
+  width: 125px;
+  min-width: 125px;
+  max-width: 125px;
+  height: 187.5px;
+  min-height: 187.5px;
+  max-height: 187.5px;
+  border-radius: 8px;
+  background-color: var(--background-skeleton);
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+.movieDetail-title--skeleton {
+  display: inline-block;
+  height: 30px;
+  width: 300px;
+  border-radius: 8px;
+  background-color: var(--background-skeleton);
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+.movieDetail-score--skeleton {
+  display: inline-block;
+  height: 22px;
+  width: 40px;
+  border-radius: 8px;
+  background-color: var(--background-skeleton);
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+/* .movieDetail-description--skeleton {
+
+} */
+
+.relatedMovies-title--skeleton {
+  height: 22px;
+  width: 200px;
+  border-radius: 8px;
+  background-color: var(--background-skeleton);
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
 
 /* Footer */
 footer {

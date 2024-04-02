@@ -23,7 +23,6 @@ async function getCategoriesPreview() {
 }
 
 async function getMoviesByCategory(categoryId) {
-    genericSectionSkeleton()
     const {data, status} = await api('/discover/movie', {
         params: {
             with_genres: categoryId,
