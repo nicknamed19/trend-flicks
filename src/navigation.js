@@ -12,7 +12,7 @@ arrowBtn.addEventListener('click', () => {
 searchFormBtn.addEventListener('click', () => changeHash('#search='));
 trendingBtn.addEventListener('click', () => changeHash('#trends'));
 
-window.addEventListener('load', navigator);
+window.addEventListener('DOMContentLoaded', navigator);
 window.addEventListener('hashchange', navigator);
 
 function navigator() {
@@ -47,6 +47,7 @@ function trendsPage() {
     movieDetailSection.classList.add('inactive');
 
     headerCategoryTitle.innerText = 'Trending';
+    genericSectionSkeleton()
     getTrendingMovies()
 }
 
@@ -69,6 +70,7 @@ function searchPage() {
     
     headerCategoryTitle.innerText = `Results for ${query}`;
     searchFormInput.value = ''
+    genericSectionSkeleton()
     getMoviesByQuery(query);
 }
 
@@ -110,6 +112,7 @@ function categoriesPage() {
     const fixCategoryName = fixQueries(categoryName);
     headerCategoryTitle.innerText = fixCategoryName;
 
+    
     getMoviesByCategory(categoryId);
 }
 
@@ -127,6 +130,7 @@ function homePage() {
     genericSection.classList.add('inactive');
     movieDetailSection.classList.add('inactive');
 
+    /* homePageSkeleton() */
     getCategoriesPreview();
     getTrendingMoviesPreview();
 }
