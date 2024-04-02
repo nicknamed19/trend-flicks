@@ -53,10 +53,20 @@ function createMoviesContainer(array, parent) {
         const filmImg = document.createElement('img');
         filmImg.classList.add('movie-img');
         filmImg.alt = film.title;
-        filmImg.src = 'https://image.tmdb.org/t/p/w300' + film.poster_path;
+        filmImg.dataset.src = 'https://image.tmdb.org/t/p/w300' + film.poster_path;
+
+        filmImg.addEventListener('error', () => {
+           filmImg.src = 'https://static.vecteezy.com/system/resources/previews/012/942/784/non_2x/broken-image-icon-isolated-on-a-white-background-no-image-symbol-for-web-and-mobile-apps-free-vector.jpg'
+           const spanTitle = document.createElement('span')
+           spanTitle.innerText = filmImg.alt
+           spanTitle.classList.add('img-error')
+
+           filmContainer.appendChild(spanTitle)           
+        })
         
         filmContainer.appendChild(filmImg);
         parent.appendChild(filmContainer);
+        registerImage(filmContainer)
     });
 }
 

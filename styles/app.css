@@ -111,6 +111,17 @@ button {
   border-radius: 8px;
 }
 
+.img-error {
+  color: black;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  left: calc(50% - 18px);
+  font-family: var(--font-family-text);
+  font-weight: var(--font-weight-text2);
+  font-size: 20px;
+}
+
 .categoriesPreview-list, .categories-list {
   display: flex;
   align-items: center;
@@ -298,6 +309,8 @@ button {
 
 .genericList-container .movie-img {
   width: 100%;
+  object-fit: cover;
+  min-height: 200px;
 }
 
 .genericList-container .movie-skeleton {
