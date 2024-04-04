@@ -9,7 +9,6 @@ function movieSkeleton(parent) {
 
         parent.append(filmContainer)
     }
-    console.log(parent);
 }
 
 function categorySkeleton(parent, quantity) {
@@ -40,13 +39,16 @@ function movieDetailSkeleton() {
     categorySkeleton(movieDetailCategoriesList, 4);
 }
 
-function createMoviesContainer(array, parent) {
-    parent.innerHTML = '';
+function createMoviesContainer(array, parent, { clean = true, } = {}) {
+    if(clean) {
+        parent.innerHTML = '';
+    }
 
     array.forEach(film => {
         const filmContainer = document.createElement('div');
         filmContainer.classList.add('movie-container');
-        filmContainer.addEventListener('click', () => {
+        filmContainer.addEventListener('click', (e) => {
+            e.stopPropagation()
             location.hash = `#movie=${film.id}`
         });
         
@@ -55,7 +57,8 @@ function createMoviesContainer(array, parent) {
         filmImg.alt = film.title;
         filmImg.dataset.src = 'https://image.tmdb.org/t/p/w300' + film.poster_path;
 
-        filmImg.addEventListener('error', () => {
+        filmImg.addEventListener('error', (e) => {
+            e.stopPropagation()
            filmImg.src = 'https://static.vecteezy.com/system/resources/previews/012/942/784/non_2x/broken-image-icon-isolated-on-a-white-background-no-image-symbol-for-web-and-mobile-apps-free-vector.jpg'
            const spanTitle = document.createElement('span')
            spanTitle.innerText = filmImg.alt

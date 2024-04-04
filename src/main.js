@@ -7,6 +7,10 @@ const api = axios.create({
     }
 });
 
+//VARIABLE DE APOYO
+let scrollInfinite;
+let loading = false;
+
 //API'S CALL
 async function getTrendingMoviesPreview() {
     const {data, status} = await api('/trending/movie/day');
@@ -31,6 +35,13 @@ async function getMoviesByCategory(categoryId) {
     const movies = data.results;
 
     createMoviesContainer(movies, genericSection);
+
+    const clousure = getNextPage('/discover/movie', genericSection, {
+        params: {
+            with_genres: categoryId,
+        }
+    })
+    scrollInfinite = clousure
 }
 
 async function getMoviesByQuery(query) {
@@ -44,6 +55,13 @@ async function getMoviesByQuery(query) {
     movies.length === 0 
         ? genericSection.innerHTML = `<p>Sorry, no results found for <strong>${query}</strong> :(</p>`
         : createMoviesContainer(movies, genericSection);
+
+    const clousure = getNextPage('/search/movie', genericSection, {
+        params: {
+            query,
+        }
+    })
+    scrollInfinite = clousure
 }
 
 async function getTrendingMovies() {
@@ -51,6 +69,9 @@ async function getTrendingMovies() {
     const movies = data.results;
 
     createMoviesContainer(movies, genericSection);
+        
+    const clousure = getNextPage('/trending/movie/day', genericSection)
+    scrollInfinite = clousure    
 };
 
 async function getMovieDetails(movieId) {
@@ -86,4 +107,52 @@ async function getMoviesRelated(movieId) {
 
     relatedMoviesContainer.scrollLeft = 0
     createMoviesContainer(movies, relatedMoviesContainer);
+}
+
+
+function getNextPage(
+        url, 
+        parent, 
+        {
+            params = {
+                with_genres: null,
+                query: null
+            }
+        } = {}
+    ) {   
+    let page = 1
+    
+    return async function getInfiniteScroll() {
+        if(loading) return;
+
+        const {scrollHeight, clientHeight, scrollTop} = document.documentElement;
+        const srcollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15)
+        const {with_genres, query} = params
+        /* console.log(with_genres);
+        console.log(query); */
+
+        if (srcollIsBottom) {
+            loading = true;
+            page++;
+
+            try {
+                const { data } = await api(url, {
+                    params: {
+                        page,
+                        with_genres,
+                        query,
+                    }
+                })
+                const movies = data.results;
+                console.log(data);
+    
+                createMoviesContainer(movies, parent, {clean: false});
+            } catch (error) {
+                console.error(error);
+            } finally {
+                loading = false
+            }
+    
+        }
+    }
 }

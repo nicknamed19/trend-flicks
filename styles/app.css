@@ -115,11 +115,10 @@ button {
   color: black;
   text-align: center;
   position: relative;
-  bottom: 0;
-  left: calc(50% - 18px);
+  bottom: 8px;
   font-family: var(--font-family-text);
   font-weight: var(--font-weight-text2);
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .categoriesPreview-list, .categories-list {
@@ -332,6 +331,7 @@ button {
   z-index: 1;
   position: absolute;
   background-color: var(--purple-light-1);
+  min-width: 412px;
 }
 
 .movieDetail-title {

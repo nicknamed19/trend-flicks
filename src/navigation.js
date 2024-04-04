@@ -29,6 +29,8 @@ function navigator() {
     } else {
         homePage()
     }
+
+    window.addEventListener('scroll', () => scrollInfinite(), { passive: false })
 }
 
 
