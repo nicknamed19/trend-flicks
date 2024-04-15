@@ -30,7 +30,14 @@ function navigator() {
         homePage()
     }
 
-    window.addEventListener('scroll', () => scrollInfinite(), { passive: false })
+    window.addEventListener('scroll', () => {
+        console.log(scrollInfinite);
+        if(scrollInfinite === 'undefined') {
+            return
+        } else {
+            scrollInfinite()
+        }
+    })
 }
 
 

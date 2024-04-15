@@ -8,7 +8,7 @@ const api = axios.create({
 });
 
 //VARIABLE DE APOYO
-let scrollInfinite;
+let scrollInfinite = 'undefined';
 let loading = false;
 
 //API'S CALL
