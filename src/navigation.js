@@ -12,8 +12,8 @@ arrowBtn.addEventListener('click', () => {
 searchFormBtn.addEventListener('click', () => changeHash('#search='));
 trendingBtn.addEventListener('click', () => changeHash('#trends'));
 
-window.addEventListener('DOMContentLoaded', navigator);
-window.addEventListener('hashchange', navigator);
+window.addEventListener('DOMContentLoaded', navigator, false);
+window.addEventListener('hashchange', navigator, false);
 
 function navigator() {
     scrollTo(top)
@@ -30,7 +30,9 @@ function navigator() {
         homePage()
     }
 
-    window.addEventListener('scroll', () => scrollInfinite(), { passive: false })
+    window.addEventListener('scroll', () => {
+        if(scrollInfinite =! 'undefined') scrollInfinite(), { passive: false }
+    })
 }
 
 

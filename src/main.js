@@ -111,15 +111,15 @@ async function getMoviesRelated(movieId) {
 
 
 function getNextPage(
-        url, 
-        parent, 
-        {
-            params = {
-                with_genres: null,
-                query: null
-            }
-        } = {}
-    ) {   
+    url, 
+    parent, 
+    {
+        params = {
+            with_genres: null,
+            query: null,
+        }
+    } = {}
+) {   
     let page = 1
     
     return async function getInfiniteScroll() {
@@ -128,8 +128,6 @@ function getNextPage(
         const {scrollHeight, clientHeight, scrollTop} = document.documentElement;
         const srcollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15)
         const {with_genres, query} = params
-        /* console.log(with_genres);
-        console.log(query); */
 
         if (srcollIsBottom) {
             loading = true;

@@ -47,15 +47,16 @@ function createMoviesContainer(array, parent, { clean = true, } = {}) {
     array.forEach(film => {
         const filmContainer = document.createElement('div');
         filmContainer.classList.add('movie-container');
-        filmContainer.addEventListener('click', (e) => {
-            e.stopPropagation()
-            location.hash = `#movie=${film.id}`
-        });
         
         const filmImg = document.createElement('img');
         filmImg.classList.add('movie-img');
         filmImg.alt = film.title;
         filmImg.dataset.src = 'https://image.tmdb.org/t/p/w300' + film.poster_path;
+
+        filmImg.addEventListener('click', (e) => {
+            e.stopPropagation()
+            location.hash = `#movie=${film.id}`
+        });
 
         filmImg.addEventListener('error', (e) => {
             e.stopPropagation()
@@ -66,8 +67,16 @@ function createMoviesContainer(array, parent, { clean = true, } = {}) {
 
            filmContainer.appendChild(spanTitle)           
         })
+
+        const movieBtn = document.createElement('button');
+        movieBtn.classList.add('movie-btn');
+
+        movieBtn.addEventListener('click', () => {
+            movieBtn.classList.toggle('movie-btn--liked');
+            movieLiked(film)
+        });
         
-        filmContainer.appendChild(filmImg);
+        filmContainer.append(filmImg, movieBtn);
         parent.appendChild(filmContainer);
         registerImage(filmContainer)
     });
@@ -129,3 +138,11 @@ function fixQueries(query) {
 
     return queryFixed  
 };
+
+function getLocalStorageData() {
+    const moviesStorage = localStorage.getItem('')
+}
+
+function movieLiked(film) {
+
+}
