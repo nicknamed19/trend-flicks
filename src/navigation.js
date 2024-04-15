@@ -31,7 +31,11 @@ function navigator() {
     }
 
     window.addEventListener('scroll', () => {
-        if(scrollInfinite =! 'undefined') scrollInfinite(), { passive: false }
+        if(scrollInfinite === 'undefined') {
+            return
+        } else {
+            scrollInfinite()
+        }
     })
 }
 
