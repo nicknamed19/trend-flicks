@@ -71,9 +71,14 @@ function createMoviesContainer(array, parent, { clean = true, } = {}) {
         const movieBtn = document.createElement('button');
         movieBtn.classList.add('movie-btn');
 
+        getLocalStorageData()[film.id] && movieBtn.classList.add('movie-btn--liked');
         movieBtn.addEventListener('click', () => {
             movieBtn.classList.toggle('movie-btn--liked');
             movieLiked(film)
+
+            if (location.hash === '') {
+                getLikedMovies()                
+            }
         });
         
         filmContainer.append(filmImg, movieBtn);
@@ -140,9 +145,28 @@ function fixQueries(query) {
 };
 
 function getLocalStorageData() {
-    const moviesStorage = localStorage.getItem('')
+    const moviesStorage = JSON.parse(localStorage.getItem('liked_movies'));
+    let item;
+
+    moviesStorage ? item = moviesStorage : item = {};
+    return item;
 }
 
 function movieLiked(film) {
+    const likedMovies = getLocalStorageData()
+    
+    if (likedMovies[film.id]) {
+        delete likedMovies[film.id];
+    } else {
+        likedMovies[film.id] = film;
+    }
 
+    localStorage.setItem('liked_movies', JSON.stringify(likedMovies))
+}
+
+function getLikedMovies() {
+    const moviesStorage = getLocalStorageData()
+    const moviesArray = Object.values(moviesStorage)
+
+    createMoviesContainer(moviesArray, likedMoviesList)
 }
