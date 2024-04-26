@@ -154,3 +154,4 @@ function getNextPage(
         }
     }
 }
+//CAMBIAR FOOTER, CREAR VERSION DESKTOP, INTEGRAR USUARIOS(?)
