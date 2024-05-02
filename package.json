@@ -4,7 +4,9 @@
   "description": "Movies App",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/nicknamed19/trend-flicks/issues"
   },
-  "homepage": "https://github.com/nicknamed19/trend-flicks#readme"
+  "homepage": "https://nicknamed19.github.io/trend-flicks",
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
 }
