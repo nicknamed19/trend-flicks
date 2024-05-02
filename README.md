@@ -29,6 +29,12 @@ La aplicación utiliza `localStorage` para almacenar tus películas favoritas, p
 
 La navegación dentro de la aplicación utiliza rutas con hash para la página de inicio, las categorías, los detalles de la película y las tendencias, lo que facilita la navegación y el uso de la aplicación.
 
+## Mejoras pendientes
+
+- **Crear versión desktop:** Implementar una versión optimizada para pantallas de escritorio.
+- **Integrar usuarios:** Agregar funcionalidades de inicio de sesión para permitir que los usuarios guarden sus películas favoritas de manera personalizada.
+- **Ocultar la sección de películas favoritas cuando no haya ninguna:** Mejorar la experiencia del usuario ocultando la sección de películas favoritas cuando no haya ninguna película guardada.
+
 ## Tecnologías utilizadas
 
 - JavaScript
@@ -43,4 +49,9 @@ La navegación dentro de la aplicación utiliza rutas con hash para la página d
 3. Explora las películas en tendencia, busca películas específicas, filtra por categorías y guarda tus películas favoritas.
 
 ¡Disfruta explorando películas con Trent's Flicks!
+
+## Visita la página desplegada
+
+Puedes visitar la aplicación desplegada [aquí](https://nicknamed19.github.io/trend-flicks/).
+
 
